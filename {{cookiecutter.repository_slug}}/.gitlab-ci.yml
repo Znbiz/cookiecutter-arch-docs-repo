@@ -1,0 +1,21 @@
+stages:
+  - validate
+
+default:
+  image: ruby:3.3
+  before_script:
+    - ruby --version
+    - python3 --version || true
+
+validate:docs:
+  stage: validate
+  script:
+    - chmod +x scripts/*.sh
+    - ./scripts/validate-docs.sh
+    - ./scripts/validate-links.sh
+    - ./scripts/validate-schemas.sh
+    - ./scripts/validate-mermaid.sh
+    - ./scripts/validate-openapi.sh
+    - ./scripts/validate-asyncapi.sh
+  rules:
+    - if: '$CI_PIPELINE_SOURCE'

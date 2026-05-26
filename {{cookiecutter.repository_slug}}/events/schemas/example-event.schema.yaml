@@ -1,0 +1,10 @@
+type: object
+title: ExampleEvent
+required:
+  - entityId
+  - status
+properties:
+  entityId:
+    type: string
+  status:
+    type: string

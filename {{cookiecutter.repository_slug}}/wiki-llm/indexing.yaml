@@ -1,0 +1,36 @@
+include:
+  - README.md
+  - AGENTS.md
+  - repository.yaml
+  - glossary.md
+  - overview.md
+  - context/**/*.md
+  - features/*.md
+  - requirements/*.md
+  - processes/*.md
+  - architecture/**/*.md
+  - api/**/*.md
+  - api/openapi/*.yaml
+  - events/**/*.md
+  - events/**/*.yaml
+  - data/**/*.md
+  - data/*.yaml
+  - testing/*.md
+  - deployment/*.md
+  - release-notes/**/*.md
+  - adr/*.md
+
+exclude:
+  - .github/**
+  - scripts/**
+  - schemas/**
+
+branch_priority:
+  - {{cookiecutter.default_branch}}
+  - release/*
+  - {{cookiecutter.feature_prefix}}/*
+
+document_kinds:
+  source_of_truth:
+    - "*.md"
+    - "*.yaml"

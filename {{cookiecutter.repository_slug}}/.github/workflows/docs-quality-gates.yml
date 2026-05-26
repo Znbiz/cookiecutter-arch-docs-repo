@@ -1,0 +1,45 @@
+name: docs-quality-gates
+
+on:
+  pull_request:
+  push:
+    branches:
+      - {{cookiecutter.default_branch}}
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Make scripts executable
+        run: chmod +x scripts/*.sh
+
+      - name: Validate docs
+        run: ./scripts/validate-docs.sh
+
+      - name: Validate links
+        run: ./scripts/validate-links.sh
+
+      - name: Validate schemas
+        run: ./scripts/validate-schemas.sh
+
+      - name: Validate mermaid
+        run: ./scripts/validate-mermaid.sh
+
+      - name: Validate OpenAPI
+        run: ./scripts/validate-openapi.sh
+
+      - name: Validate AsyncAPI
+        run: ./scripts/validate-asyncapi.sh

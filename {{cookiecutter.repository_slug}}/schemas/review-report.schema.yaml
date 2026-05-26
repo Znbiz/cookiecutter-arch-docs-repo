@@ -1,0 +1,22 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Review Report Metadata
+type: object
+required:
+  - feature_id
+  - recommendation
+properties:
+  feature_id:
+    type: string
+  recommendation:
+    type: string
+    enum:
+      - Ready
+      - Not Ready
+  critical_issues:
+    type: array
+    items:
+      type: string
+  warnings:
+    type: array
+    items:
+      type: string

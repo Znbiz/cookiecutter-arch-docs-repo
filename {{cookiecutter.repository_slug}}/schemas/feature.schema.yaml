@@ -1,0 +1,25 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Feature Metadata
+type: object
+required:
+  - id
+  - title
+  - status
+  - acceptance_criteria
+properties:
+  id:
+    type: string
+    pattern: '^FEATURE-[A-Z0-9-]+$'
+  title:
+    type: string
+  status:
+    type: string
+    enum:
+      - draft
+      - approved
+      - implemented
+  acceptance_criteria:
+    type: array
+    minItems: 1
+    items:
+      type: string

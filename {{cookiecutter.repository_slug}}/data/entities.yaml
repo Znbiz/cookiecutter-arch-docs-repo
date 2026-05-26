@@ -1,0 +1,10 @@
+entities:
+  - id: example_entity
+    owner_service: example-service
+    datastore: example-db
+    description: Замените на реальную доменную сущность.
+    fields:
+      - name: id
+        type: string
+      - name: state
+        type: string

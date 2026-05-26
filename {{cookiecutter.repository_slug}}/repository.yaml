@@ -1,0 +1,83 @@
+project:
+  id: "{{cookiecutter.project_id}}"
+  name: "{{cookiecutter.project_name}}"
+  description: Кратко опишите назначение продукта и границы документации.
+  owner_team: "{{cookiecutter.owner_team}}"
+  documentation_language: "{{cookiecutter.documentation_language}}"
+
+repositories:
+  - id: example-app-repo
+    name: example-app
+    provider: "{{cookiecutter.primary_git_provider}}"
+    url: "https://{{cookiecutter.primary_git_provider}}.example.com/org/example-app"
+    default_branch: "{{cookiecutter.default_branch}}"
+    repository_type: application
+    architecture_type: service
+    primary_languages:
+      - unknown
+    frameworks:
+      - unknown
+    contains_services:
+      - example-service
+    contains_libraries: []
+    contains_infrastructure_code: []
+    access_mode_for_agents: read-only-preferred
+    description: Замените на реальные кодовые репозитории продукта.
+
+services:
+  - id: example-service
+    repository_id: example-app-repo
+    service_type: backend-api
+    runtime: unknown
+    language: unknown
+    framework: unknown
+    description: Опишите основной сервис или компонент.
+    owned_datastores: []
+    consumed_datastores: []
+    produces_events: []
+    consumes_events: []
+    exposed_ports:
+      - port: 8080
+        protocol: http
+        purpose: example endpoint
+
+datastores:
+  - id: example-db
+    type: unknown
+    owner_service: example-service
+    purpose: Опишите назначение хранилища.
+    contains_personal_data: false
+    logical_schemas:
+      - example
+    used_by_services:
+      - example-service
+
+queues:
+  - id: example-broker
+    type: unknown
+    purpose: Опишите очередь, топик или брокер, если применимо.
+    topics:
+      - name: example.topic
+        producers:
+          - example-service
+        consumers:
+          - example-consumer
+
+external_services:
+  - id: example-external-system
+    type: external-api
+    protocol: unknown
+    purpose: Опишите внешнюю систему, если она есть.
+    used_by_services:
+      - example-service
+
+relationships:
+  - from: example-service
+    to: example-db
+    type: sql
+    contract: data/entities.yaml
+
+  - from: example-service
+    to: example-broker
+    type: message-producer
+    contract: events/asyncapi.yaml

@@ -1,0 +1,13 @@
+{
+  "project_id": "example-product",
+  "project_name": "Пример продукта",
+  "repository_slug": "example-arch-repo",
+  "owner_team": "Example Team",
+  "primary_git_provider": [
+    "gitlab",
+    "github"
+  ],
+  "default_branch": "main",
+  "feature_prefix": "feature",
+  "documentation_language": "ru"
+}

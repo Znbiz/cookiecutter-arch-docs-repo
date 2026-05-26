@@ -1,0 +1,17 @@
+asyncapi: 2.6.0
+info:
+  title: Example Domain Events
+  version: 1.0.0
+  description: Замените на реальные доменные события проекта.
+channels:
+  example/event:
+    publish:
+      summary: Example domain event
+      message:
+        $ref: '#/components/messages/ExampleEvent'
+components:
+  messages:
+    ExampleEvent:
+      name: ExampleEvent
+      payload:
+        $ref: './schemas/example-event.schema.yaml'
