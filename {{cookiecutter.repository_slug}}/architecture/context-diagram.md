@@ -2,9 +2,9 @@
 
 ```mermaid
 flowchart TB
-    User["Пользователь"] --> Client["Клиентское приложение"]
-    Client --> Subscription["Subscription Service"]
-    Subscription --> Payment["Payment Gateway"]
-    Subscription --> Events["Kafka / Billing Events"]
-    Subscription --> DB["Subscription DB"]
+    User["Role / Actor"] --> Client["Entry Point"]
+    Client --> Core["Core Service"]
+    Core --> External["External System"]
+    Core --> Events["Event Bus"]
+    Core --> DB["Primary Datastore"]
 ```

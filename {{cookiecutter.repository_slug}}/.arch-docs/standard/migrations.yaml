@@ -1,0 +1,63 @@
+current_version: 2026.05.6
+
+migrations:
+  - id: baseline-2026-05-0
+    from: 2026.05.0
+    to: 2026.05.0
+    description: >
+      Базовый стандарт arch-docs репозитория с локальными режимами
+      audit, migrate, bootstrap и wiki-llm sync.
+    commit_message: "chore(arch-docs): align with standard 2026.05.0"
+    actions: []
+  - id: flatten-context-into-overview-2026-05-1
+    from: 2026.05.0
+    to: 2026.05.1
+    description: >
+      Убирает обязательный каталог context и делает overview.md
+      единой корневой точкой входа для описания продукта, команды,
+      интеграций и навигации по документации.
+    commit_message: "chore(arch-docs): align with standard 2026.05.1"
+    actions: []
+  - id: move-service-artifacts-under-dot-arch-docs-2026-05-2
+    from: 2026.05.1
+    to: 2026.05.2
+    description: >
+      Переносит служебные каталоги scripts, schemas, agents, templates и
+      wiki-llm под .arch-docs/, сохраняя предметную документацию в корне.
+    commit_message: "chore(arch-docs): align with standard 2026.05.2"
+    actions: []
+  - id: move-standard-and-reports-under-dot-arch-docs-2026-05-3
+    from: 2026.05.2
+    to: 2026.05.3
+    description: >
+      Переносит локальный стандарт и generated reports под .arch-docs/,
+      оставляя в корне только продуктовую документацию, AGENTS.md,
+      repository.yaml и arch-docs.yaml.
+    commit_message: "chore(arch-docs): align with standard 2026.05.3"
+    actions: []
+  - id: collapse-technical-domains-under-architecture-2026-05-4
+    from: 2026.05.3
+    to: 2026.05.4
+    description: >
+      Переносит requirements, api, data, testing и deployment под architecture/
+      как единый архитектурный слой документации.
+    commit_message: "chore(arch-docs): align with standard 2026.05.4"
+    actions: []
+  - id: move-docs-to-dot-docs-and-drop-processes-2026-05-5
+    from: 2026.05.4
+    to: 2026.05.5
+    description: >
+      Обозначает workflow-документацию как служебную через .docs/ и
+      окончательно убирает неиспользуемый каталог processes.
+    commit_message: "chore(arch-docs): align with standard 2026.05.5"
+    actions: []
+  - id: introduce-agent-led-standard-migration-2026-05-6
+    from: 2026.05.5
+    to: 2026.05.6
+    description: >
+      Делает миграцию локального стандарта отдельным agent-led workflow:
+      добавляет обязательный skill standard-migrator и требует анализировать
+      изменения cookiecutter-стандарта относительно локального репозитория
+      перед обновлением версии.
+    commit_message: "chore(arch-docs): align with standard 2026.05.6"
+    actions: []

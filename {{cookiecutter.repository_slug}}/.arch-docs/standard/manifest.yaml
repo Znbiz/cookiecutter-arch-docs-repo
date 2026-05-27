@@ -1,0 +1,96 @@
+version: 2026.05.6
+
+required_files:
+  - README.md
+  - AGENTS.md
+  - arch-docs.yaml
+  - repository.yaml
+  - .arch-docs/reports/README.md
+  - .arch-docs/standard/manifest.yaml
+  - .arch-docs/standard/migrations.yaml
+  - .arch-docs/schemas/arch-docs.schema.yaml
+  - .docs/codex-workflow.md
+  - .arch-docs/wiki-llm/README.md
+  - .arch-docs/wiki-llm/indexing.yaml
+  - .arch-docs/wiki-llm/index-manifest.yaml
+  - .arch-docs/wiki-llm/retrieval-policy.md
+  - .arch-docs/wiki-llm/source-policy.md
+  - .arch-docs/wiki-llm/branch-policy.md
+  - .arch-docs/scripts/audit-standard.sh
+  - .arch-docs/scripts/migrate-standard.sh
+  - .arch-docs/scripts/bootstrap-repo.sh
+  - .arch-docs/scripts/wiki-llm-sync.sh
+  - .arch-docs/scripts/arch-docs-tool.rb
+
+required_directories:
+  - .arch-docs
+  - .arch-docs/reports
+  - .arch-docs/standard
+  - .arch-docs/agents
+  - .arch-docs/schemas
+  - .arch-docs/scripts
+  - .arch-docs/templates
+  - .arch-docs/wiki-llm
+  - .docs
+  - architecture
+  - architecture/api
+  - architecture/data
+  - architecture/deployment
+  - architecture/requirements
+  - architecture/testing
+  - features
+  - release-notes
+
+required_role_paths:
+  - .arch-docs/agents/standard-migrator/SKILL.md
+  - .arch-docs/agents/analyst-architect/SKILL.md
+  - .arch-docs/agents/documentation-mapper/SKILL.md
+  - .arch-docs/agents/completeness-reviewer/SKILL.md
+  - .arch-docs/agents/architecture-reviewer/SKILL.md
+  - .arch-docs/agents/contract-reviewer/SKILL.md
+  - .arch-docs/agents/test-reviewer/SKILL.md
+  - .arch-docs/agents/security-reviewer/SKILL.md
+  - .arch-docs/agents/implementation-verifier/SKILL.md
+
+required_scripts:
+  - .arch-docs/scripts/validate-docs.sh
+  - .arch-docs/scripts/validate-links.sh
+  - .arch-docs/scripts/validate-schemas.sh
+  - .arch-docs/scripts/validate-mermaid.sh
+  - .arch-docs/scripts/validate-openapi.sh
+  - .arch-docs/scripts/validate-asyncapi.sh
+  - .arch-docs/scripts/audit-standard.sh
+  - .arch-docs/scripts/migrate-standard.sh
+  - .arch-docs/scripts/bootstrap-repo.sh
+  - .arch-docs/scripts/wiki-llm-sync.sh
+
+workflow_stages:
+  - repo-audit
+  - repo-migration-analysis
+  - repo-migrate
+  - repo-bootstrap
+  - feature-discovery
+  - documentation-mapping
+  - review
+  - implementation-verification
+  - wiki-llm-sync
+
+bootstrap_source_globs:
+  - "**/*.md"
+  - "**/*.yaml"
+  - "**/*.yml"
+  - "**/*.json"
+  - ".gitlab-ci.yml"
+  - ".github/workflows/*.yml"
+
+placeholder_markers:
+  - "{{cookiecutter."
+  - "unknown"
+  - "Опишите "
+  - "Замените "
+  - "Неизвестно / требует уточнения"
+
+expected_sections:
+  - architecture
+  - release-notes
+  - adr

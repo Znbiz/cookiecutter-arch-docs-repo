@@ -24,22 +24,28 @@ jobs:
           python-version: "3.12"
 
       - name: Make scripts executable
-        run: chmod +x scripts/*.sh
+        run: chmod +x .arch-docs/scripts/*.sh
+
+      - name: Check wiki-llm manifest
+        run: ./.arch-docs/scripts/wiki-llm-sync.sh --check
+
+      - name: Audit local standard
+        run: ./.arch-docs/scripts/audit-standard.sh --fail-on-gap
 
       - name: Validate docs
-        run: ./scripts/validate-docs.sh
+        run: ./.arch-docs/scripts/validate-docs.sh
 
       - name: Validate links
-        run: ./scripts/validate-links.sh
+        run: ./.arch-docs/scripts/validate-links.sh
 
       - name: Validate schemas
-        run: ./scripts/validate-schemas.sh
+        run: ./.arch-docs/scripts/validate-schemas.sh
 
       - name: Validate mermaid
-        run: ./scripts/validate-mermaid.sh
+        run: ./.arch-docs/scripts/validate-mermaid.sh
 
       - name: Validate OpenAPI
-        run: ./scripts/validate-openapi.sh
+        run: ./.arch-docs/scripts/validate-openapi.sh
 
       - name: Validate AsyncAPI
-        run: ./scripts/validate-asyncapi.sh
+        run: ./.arch-docs/scripts/validate-asyncapi.sh

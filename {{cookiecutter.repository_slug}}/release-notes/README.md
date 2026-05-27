@@ -4,7 +4,7 @@
 
 Правила:
 
-- используйте шаблон `templates/release-notes.md`;
+- используйте шаблон `.arch-docs/templates/release-notes.md`;
 - связывайте релизные заметки с реальными feature-файлами;
 - не храните bootstrap- или демо-релизы в готовом шаблоне.
 

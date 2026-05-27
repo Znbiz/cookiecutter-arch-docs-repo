@@ -1,0 +1,35 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Architecture Docs Repository Standard Config
+type: object
+required:
+  - standard
+  - repository_modes
+  - wiki_llm
+  - local_roles
+properties:
+  standard:
+    type: object
+    required:
+      - template_name
+      - template_repository
+      - applied_version
+      - target_version
+      - migration_index
+    properties:
+      template_name:
+        type: string
+      template_repository:
+        type: string
+      applied_version:
+        type: string
+      target_version:
+        type: string
+      migration_index:
+        type: string
+  repository_modes:
+    type: object
+  wiki_llm:
+    type: object
+  local_roles:
+    type: array
+    minItems: 1

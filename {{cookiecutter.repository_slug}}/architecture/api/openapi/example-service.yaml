@@ -1,0 +1,33 @@
+# Описание полей: .docs/yaml-field-reference.md#architectureapiopenapiexample-serviceyaml
+openapi: 3.0.3
+info:
+  title: Example Service API
+  version: 1.0.0
+  description: Замените на реальный контракт проекта.
+paths:
+  /example-resources/{resourceId}:
+    post:
+      summary: Execute example operation
+      operationId: executeExampleOperation
+      parameters:
+        - in: path
+          name: resourceId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - command
+              properties:
+                command:
+                  type: string
+      responses:
+        "200":
+          description: Operation completed
+        "400":
+          description: Invalid request

@@ -1,83 +1,259 @@
+# Корневой справочник по полям: .docs/yaml-field-reference.md#repositoryyaml
 project:
+  # Уникальный идентификатор продукта или платформы в рамках документации.
   id: "{{cookiecutter.project_id}}"
+  # Человекочитаемое название продукта.
   name: "{{cookiecutter.project_name}}"
+  # Краткое описание назначения продукта и границ этого документационного репозитория.
   description: Кратко опишите назначение продукта и границы документации.
+  # Команда-владелец, которая отвечает за актуальность и согласование документации.
   owner_team: "{{cookiecutter.owner_team}}"
+  # Основной язык, на котором ведется архитектурная и продуктовая документация.
   documentation_language: "{{cookiecutter.documentation_language}}"
 
+# Правила ролей, доступа и зон согласования для участников процесса.
+role_policy:
+  - role: product-owner
+    # Системное имя роли, используемое в workflow и описаниях ответственности.
+    responsibilities:
+      # Основные обязанности роли в контуре управления документацией и изменениями.
+      - Приоритизация изменений
+      - Подтверждение бизнес-целей и acceptance criteria
+    access_scope:
+      # Разделы, которые роль может инициировать или редактировать.
+      - requirements
+      - features
+      - release-notes
+    approval_scope:
+      # Типы решений или артефактов, для которых требуется согласование этой роли.
+      - business-requirements
+      - feature-scope
+    # Свободная заметка с локальными правилами и ограничениями.
+    notes: Замените на реальные роли и границы ответственности.
+
+  - role: architecture-owner
+    responsibilities:
+      - Архитектурная целостность
+      - Проверка интеграций и impact по разделам
+    access_scope:
+      - architecture
+      - api
+      - data
+      - deployment
+    approval_scope:
+      - architecture-changes
+      - adr
+    notes: Укажите, кто принимает архитектурные решения.
+
+# Каталог кодовых репозиториев, из которых состоит продукт или платформа.
 repositories:
+  # Уникальный идентификатор репозитория для ссылок из других разделов файла.
   - id: example-app-repo
+    # Короткое имя репозитория без URL.
     name: example-app
+    # Git-провайдер, где размещен репозиторий.
     provider: "{{cookiecutter.primary_git_provider}}"
+    # Канонический URL репозитория.
     url: "https://{{cookiecutter.primary_git_provider}}.example.com/org/example-app"
+    # Основная ветка репозитория, относительно которой оценивают изменения.
     default_branch: "{{cookiecutter.default_branch}}"
+    # Тип репозитория: приложение, библиотека, инфраструктура и т.д.
     repository_type: application
+    # Архитектурная роль репозитория в системе: service, monolith, library и т.д.
     architecture_type: service
+    # Основные языки реализации.
     primary_languages:
       - unknown
+    # Ключевые фреймворки или платформы.
     frameworks:
       - unknown
+    # Сервисы, которые хранятся в этом репозитории.
     contains_services:
       - example-service
+    # Библиотеки, публикуемые или поддерживаемые этим репозиторием.
     contains_libraries: []
+    # Инфраструктурные компоненты или IaC-артефакты в этом репозитории.
     contains_infrastructure_code: []
+    # Ожидаемый режим доступа агентов к репозиторию.
     access_mode_for_agents: read-only-preferred
+    # Краткое описание назначения репозитория.
     description: Замените на реальные кодовые репозитории продукта.
 
+# Каталог сервисов и исполняемых компонентов системы.
 services:
   - id: example-service
+    # Ссылка на repository.id, где расположен код сервиса.
     repository_id: example-app-repo
+    # Тип сервиса: backend-api, worker, frontend, batch-job и т.д.
     service_type: backend-api
+    # Основная runtime-среда исполнения.
     runtime: unknown
+    # Основной язык сервиса.
     language: unknown
+    # Основной фреймворк или стек.
     framework: unknown
+    # Что делает сервис и за какой bounded context отвечает.
     description: Опишите основной сервис или компонент.
+    # Хранилища, которыми сервис владеет и за схему которых отвечает.
     owned_datastores: []
+    # Хранилища, которые сервис читает или использует, но не владеет ими.
     consumed_datastores: []
+    # Доменные события, которые сервис публикует.
     produces_events: []
+    # Доменные события, которые сервис потребляет.
     consumes_events: []
+    # Порты и протоколы, которые сервис открывает наружу или внутри контура.
     exposed_ports:
+      # Номер порта.
       - port: 8080
+        # Сетевой протокол или тип интерфейса.
         protocol: http
+        # Назначение порта или интерфейса.
         purpose: example endpoint
 
+# Каталог постоянных хранилищ данных.
 datastores:
   - id: example-db
+    # Уникальный идентификатор хранилища.
     type: unknown
+    # Тип хранилища: postgres, redis, s3, elasticsearch и т.д.
     owner_service: example-service
+    # Сервис-владелец хранилища, если ownership определен.
     purpose: Опишите назначение хранилища.
+    # Бизнес-назначение и тип данных, которые там лежат.
     contains_personal_data: false
+    # Флаг наличия персональных данных или иных чувствительных данных.
     logical_schemas:
+      # Логические схемы, namespace или domain-области внутри хранилища.
       - example
     used_by_services:
+      # Сервисы, которые читают или пишут в это хранилище.
       - example-service
 
+# Каталог брокеров, очередей и логических каналов сообщений.
 queues:
   - id: example-broker
+    # Уникальный идентификатор брокера, очереди или event bus.
     type: unknown
+    # Тип технологии: kafka, rabbitmq, sqs, pubsub и т.д.
     purpose: Опишите очередь, топик или брокер, если применимо.
+    # Бизнес-или техническое назначение очереди/брокера.
     topics:
       - name: example.topic
+        # Имя топика, очереди или routing key.
         producers:
+          # Сервисы, которые публикуют сообщения.
           - example-service
         consumers:
+          # Сервисы, которые читают сообщения.
           - example-consumer
 
+# Внешние системы, которые не находятся под вашим прямым контролем.
 external_services:
   - id: example-external-system
+    # Уникальный идентификатор внешней системы.
     type: external-api
+    # Тип интеграции или внешнего компонента.
     protocol: unknown
+    # Базовый протокол взаимодействия.
     purpose: Опишите внешнюю систему, если она есть.
+    # Зачем эта система нужна продукту.
     used_by_services:
+      # Сервисы, которые используют внешний контур.
       - example-service
 
+# Каталог интеграций и их контрактов.
+integration_catalog:
+  - id: example-external-api
+    # Уникальный идентификатор записи об интеграции.
+    counterpart: example-external-system
+    # Внешняя или внутренняя сторона интеграции, с которой связан поток.
+    direction: outbound
+    # Направление вызова: inbound, outbound, bidirectional.
+    protocol: https
+    # Протокол контракта или транспорта.
+    purpose: Опишите, с кем интегрируетесь и зачем.
+    # Зачем нужна интеграция и какую задачу она решает.
+    owner_role: architecture-owner
+    # Роль или группа, отвечающая за согласование изменений по интеграции.
+    source_service: example-service
+    # Источник вызова или публикации.
+    target_service: example-external-system
+    # Получатель вызова, брокер или внешний контур.
+    contracts:
+      # Ссылки на OpenAPI, AsyncAPI, schema-файлы или иные машиночитаемые контракты.
+      - architecture/api/openapi/example-service.yaml
+    risks:
+      # Основные операционные или архитектурные риски интеграции.
+      - timeouts
+      - contract-drift
+
+# Описание сред, в которых живет система.
+environments:
+  - name: dev
+    # Имя окружения.
+    purpose: Ранняя проверка сценариев и интеграций.
+    # Для каких задач и этапов используется среда.
+    addresses:
+      # Публичная базовая точка входа, если она есть.
+      public_base_url: https://dev.example.com
+      private_endpoints:
+        # Внутренние адреса сервисов или платформенных endpoints.
+        - http://example-service.dev.svc.cluster.local:8080
+    resources:
+      # Целевая платформа или runtime-контур.
+      runtime: kubernetes
+      # Номинальное количество реплик.
+      replicas: 1
+      # Выделение CPU.
+      cpu: 500m
+      # Выделение памяти.
+      memory: 512Mi
+      # Класс или tier хранилища, используемого в этой среде.
+      datastore_tier: shared
+    # Локальные договоренности, ограничения или особенности окружения.
+    notes: Замените адреса и ресурсы на реальные значения.
+
+  - name: stage
+    purpose: Интеграционные, contract и e2e проверки.
+    addresses:
+      public_base_url: https://stage.example.com
+      private_endpoints:
+        - http://example-service.stage.svc.cluster.local:8080
+    resources:
+      runtime: kubernetes
+      replicas: 2
+      cpu: "1"
+      memory: 1Gi
+      datastore_tier: isolated
+    notes: Здесь обычно отражают окружение, максимально близкое к production.
+
+  - name: prod
+    purpose: Production runtime.
+    addresses:
+      public_base_url: https://prod.example.com
+      private_endpoints:
+        - http://example-service.prod.svc.cluster.local:8080
+    resources:
+      runtime: kubernetes
+      replicas: 3
+      cpu: "2"
+      memory: 2Gi
+      datastore_tier: production
+    notes: Укажите SLA/SLO-чувствительные параметры, если нужно.
+
+# Связи между сервисами, данными, брокерами и контрактами.
 relationships:
+  # Источник взаимодействия. Должен ссылаться на service.id.
   - from: example-service
+    # Целевой компонент: сервис, datastore или queue.
     to: example-db
+    # Тип связи: sql, http, grpc, message-producer, message-consumer и т.д.
     type: sql
-    contract: data/entities.yaml
+    # Ссылка на документ или контракт, который описывает эту связь.
+    contract: architecture/data/entities.yaml
 
   - from: example-service
     to: example-broker
     type: message-producer
-    contract: events/asyncapi.yaml
+    contract: architecture/api/events/asyncapi.yaml

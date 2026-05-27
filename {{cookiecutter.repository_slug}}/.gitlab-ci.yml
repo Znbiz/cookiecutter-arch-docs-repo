@@ -10,12 +10,14 @@ default:
 validate:docs:
   stage: validate
   script:
-    - chmod +x scripts/*.sh
-    - ./scripts/validate-docs.sh
-    - ./scripts/validate-links.sh
-    - ./scripts/validate-schemas.sh
-    - ./scripts/validate-mermaid.sh
-    - ./scripts/validate-openapi.sh
-    - ./scripts/validate-asyncapi.sh
+    - chmod +x .arch-docs/scripts/*.sh
+    - ./.arch-docs/scripts/wiki-llm-sync.sh --check
+    - ./.arch-docs/scripts/audit-standard.sh --fail-on-gap
+    - ./.arch-docs/scripts/validate-docs.sh
+    - ./.arch-docs/scripts/validate-links.sh
+    - ./.arch-docs/scripts/validate-schemas.sh
+    - ./.arch-docs/scripts/validate-mermaid.sh
+    - ./.arch-docs/scripts/validate-openapi.sh
+    - ./.arch-docs/scripts/validate-asyncapi.sh
   rules:
     - if: '$CI_PIPELINE_SOURCE'

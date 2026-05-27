@@ -1,0 +1,34 @@
+include:
+  - README.md
+  - AGENTS.md
+  - arch-docs.yaml
+  - repository.yaml
+  - glossary.md
+  - overview.md
+  - .arch-docs/wiki-llm/README.md
+  - .arch-docs/wiki-llm/retrieval-policy.md
+  - .arch-docs/wiki-llm/source-policy.md
+  - .arch-docs/wiki-llm/branch-policy.md
+  - .arch-docs/wiki-llm/indexing.yaml
+  - .docs/**/*.md
+  - features/*.md
+  - architecture/**/*.md
+  - architecture/**/*.yaml
+  - release-notes/**/*.md
+  - adr/*.md
+
+exclude:
+  - .github/**
+  - .arch-docs/reports/**
+  - .arch-docs/scripts/**
+  - .arch-docs/schemas/**
+
+branch_priority:
+  - "{{cookiecutter.default_branch}}"
+  - release/*
+  - "{{cookiecutter.feature_prefix}}/*"
+
+document_kinds:
+  source_of_truth:
+    - "*.md"
+    - "*.yaml"

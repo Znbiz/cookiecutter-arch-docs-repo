@@ -1,0 +1,100 @@
+# Корневой справочник по полям: .docs/yaml-field-reference.md#arch-docsyaml
+standard:
+  # Имя стандарта или шаблона, от которого был создан репозиторий.
+  template_name: cookiecutter-arch-docs-repo
+  # Канонический источник шаблона.
+  template_repository: znbiz/cookiecutter-arch-docs-repo
+  # Версия стандарта, фактически примененная к текущему репозиторию.
+  applied_version: 2026.05.6
+  # Версия стандарта, до которой репозиторий должен быть доведен.
+  target_version: 2026.05.6
+  # Путь к индексу миграций между версиями стандарта.
+  migration_index: .arch-docs/standard/migrations.yaml
+
+# Управление основными режимами работы со стандартом репозитория.
+repository_modes:
+  audit:
+    # Включает проверку соответствия репозитория стандарту.
+    enabled: true
+    # Куда складывать отчет о найденных отклонениях.
+    report_path: .arch-docs/reports/standard-audit.md
+    # Должен ли CI падать, если найдены пробелы относительно стандарта.
+    fail_on_gap_in_ci: true
+  migrate:
+    # Включает режим миграции репозитория к target_version.
+    enabled: true
+    # Делать ли отдельный commit на каждую миграцию стандарта.
+    commit_per_migration: true
+    # Разрешать ли миграцию при незакоммиченных локальных изменениях.
+    allow_dirty_worktree: false
+    # Куда сохранять отчет по выполненной миграции.
+    report_path: .arch-docs/reports/standard-migration.md
+  bootstrap:
+    # Включает режим первичного наполнения документации по существующему репозиторию.
+    enabled: true
+    # Текущее состояние bootstrap-процесса.
+    status: scaffold
+    # Разрешает ли bootstrap итеративное донаполнение, а не только одноразовый прогон.
+    iterative: true
+    # Куда писать gap-report по первичному наполнению.
+    report_path: .arch-docs/reports/bootstrap-gap-report.md
+    gather_from:
+      # Источники, из которых можно собирать контекст при bootstrap.
+      - repository-files
+      - existing-markdown
+      - ci-config
+      - contracts
+      - schemas
+      - interview-notes
+
+# Настройка локального retrieval-слоя поверх документации.
+wiki_llm:
+  # Включает или выключает wiki-llm индекс для локальной навигации и retrieval.
+  enabled: true
+  # Правила отбора файлов в индекс.
+  indexing_config: .arch-docs/wiki-llm/indexing.yaml
+  # Детерминированный manifest текущего состояния индекса.
+  manifest_path: .arch-docs/wiki-llm/index-manifest.yaml
+  # Нужно ли обновлять индекс после правок документации.
+  sync_on_doc_changes: true
+  required_documents:
+    # Документы, без которых wiki-llm считается неполным.
+    - .arch-docs/wiki-llm/README.md
+    - .arch-docs/wiki-llm/retrieval-policy.md
+    - .arch-docs/wiki-llm/source-policy.md
+    - .arch-docs/wiki-llm/branch-policy.md
+
+# Локальные роли/skills, обязательные для работы с репозиторием.
+local_roles:
+  # Уникальный идентификатор роли.
+  - id: standard-migrator
+    # Путь к описанию skill/роли для обновления локального стандарта.
+    path: .arch-docs/agents/standard-migrator/SKILL.md
+    # Обязательна ли роль для стандартного workflow.
+    required: true
+  - id: analyst-architect
+    # Путь к описанию skill/роли.
+    path: .arch-docs/agents/analyst-architect/SKILL.md
+    # Обязательна ли роль для стандартного workflow.
+    required: true
+  - id: documentation-mapper
+    path: .arch-docs/agents/documentation-mapper/SKILL.md
+    required: true
+  - id: completeness-reviewer
+    path: .arch-docs/agents/completeness-reviewer/SKILL.md
+    required: true
+  - id: architecture-reviewer
+    path: .arch-docs/agents/architecture-reviewer/SKILL.md
+    required: true
+  - id: contract-reviewer
+    path: .arch-docs/agents/contract-reviewer/SKILL.md
+    required: true
+  - id: test-reviewer
+    path: .arch-docs/agents/test-reviewer/SKILL.md
+    required: true
+  - id: security-reviewer
+    path: .arch-docs/agents/security-reviewer/SKILL.md
+    required: true
+  - id: implementation-verifier
+    path: .arch-docs/agents/implementation-verifier/SKILL.md
+    required: true
